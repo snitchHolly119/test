@@ -590,6 +590,28 @@ if (typeof Math.rangeInt != 'function') {
     }
 
     /** Mobile Events **/
+
+    WordSearch.prototype.onSelectingchange = function(item) {
+        var _this = this;
+        return function() {
+          if (_this.selectFrom) {
+            _this.selected = _this.getItems(_this.selectFrom.row, _this.selectFrom.col, item.row, item.col);
+    
+            _this.clearHighlight();
+    
+            for (var i = 0; i < _this.selected.length; i ++) {
+              var current = _this.selected[i],
+                row = current.row + 1,
+                col = current.col + 1,
+                el = document.querySelector('.ws-area .ws-row:nth-child(' + row + ') .ws-col:nth-child(' + col + ')');
+    
+              el.className += ' ws-selected';
+            }
+          }
+        }
+      }
+
+
     WordSearch.prototype.onTouchend = function() {
         var _this = this;
         return function() {
